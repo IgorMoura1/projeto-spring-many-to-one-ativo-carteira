@@ -10,14 +10,19 @@ import lombok.Data;
 //@NoArgsConstructor
 public class AtivoResponseDto {
 
+    private Integer id;
+    private String nome;
+    private String tipo;
+    private Double valorAtual;
     private AtivoCarteiraResponseDto carteira;
 
-    // TODO: TERMINAR A CLASSE
     @Data
     @Builder
 //    @NoArgsConstructor
 //    @AllArgsConstructor
     public static class AtivoCarteiraResponseDto {
-
+        private Integer id;
+        private String nome;
+        private String investidor;
     }
 }
