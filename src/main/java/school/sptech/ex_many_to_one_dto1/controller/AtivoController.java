@@ -11,6 +11,8 @@ import school.sptech.ex_many_to_one_dto1.dto.ativo.AtivoRequestDto;
 import school.sptech.ex_many_to_one_dto1.dto.ativo.AtivoResponseDto;
 import school.sptech.ex_many_to_one_dto1.entity.Ativo;
 import school.sptech.ex_many_to_one_dto1.service.AtivoService;
+import org.springframework.web.bind.annotation.*;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,33 +26,53 @@ public class AtivoController {
     private final AtivoService ativoService;
 
 
-    public ResponseEntity<AtivoResponseDto> cadastrar(
+    @PostMapping
+    public ResponseEntity<AtivoResponseDto> salvar(
             @RequestBody @Valid AtivoRequestDto ativoRequestDto) {
         Ativo ativoEntidade = AtivoMapper.toAtivoEntity(ativoRequestDto);
 
-        Ativo ativoSalvoNoBanco = ativoService.criar(ativoEntidade, ativoRequestDto.getCarteiraId());
+        Ativo ativoSalvoNoBanco = ativoService.salvar(ativoEntidade, ativoRequestDto.getCarteiraId());
 
         AtivoResponseDto ativoResponseDto = AtivoMapper.toAtivoResponseDto(ativoSalvoNoBanco);
         return ResponseEntity.created(null).body(ativoResponseDto);
     }
 
     public ResponseEntity<List<AtivoResponseDto>> buscarTodos() {
-        List<Ativo> ativos = ativoService.buscarAtivos();
+
+        List<Ativo> ativos = ativoService.buscarTodos();
+
 
         if(ativos.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
 
-        List<AtivoResponseDto> listaDto = new ArrayList<>();
 
-        return ResponseEntity.internalServerError().build();
+        List<AtivoResponseDto> listaDto = ativos
+                .stream()
+                .map(AtivoMapper::toAtivoResponseDto)
+                .toList();
+
+        return ResponseEntity.status(200).build();       
     }
 
-    public ResponseEntity<AtivoResponseDto> buscarPorId(Integer id) {
-        return ResponseEntity.internalServerError().build();
+    @GetMapping("{id}")
+    public ResponseEntity<AtivoResponseDto> buscarPorId(@PathVariable int id) {
+        Ativo ativo = this.ativoService.buscarPorId(id);
+
+        AtivoResponseDto dto = AtivoMapper.toAtivoResponseDto(ativo);
+        return ResponseEntity.status(200).build();
     }
 
-    public ResponseEntity<Void> deletarPorId(Integer id) {
+    @DeleteMapping("{id}")
+    public ResponseEntity<Void> deletarPorId(@PathVariable Integer id) {
+        Ativo ativo = this.ativoService.buscarPorId(id);
+
+        if(ativo == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        this.ativoService.deletarPorId(id);
+
         return ResponseEntity.internalServerError().build();
     }
 
