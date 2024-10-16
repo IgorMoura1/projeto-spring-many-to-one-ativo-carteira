@@ -13,6 +13,8 @@ import school.sptech.ex_many_to_one_dto1.entity.Ativo;
 import school.sptech.ex_many_to_one_dto1.service.AtivoService;
 import org.springframework.web.bind.annotation.*;
 
+
+import java.util.ArrayList;
 import java.util.List;
 
 // TODO: TERMINAR A CLASSE
@@ -22,6 +24,7 @@ import java.util.List;
 public class AtivoController {
 
     private final AtivoService ativoService;
+
 
     @PostMapping
     public ResponseEntity<AtivoResponseDto> salvar(
@@ -35,18 +38,21 @@ public class AtivoController {
     }
 
     public ResponseEntity<List<AtivoResponseDto>> buscarTodos() {
+
         List<Ativo> ativos = ativoService.buscarTodos();
+
 
         if(ativos.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
+
 
         List<AtivoResponseDto> listaDto = ativos
                 .stream()
                 .map(AtivoMapper::toAtivoResponseDto)
                 .toList();
 
-        return ResponseEntity.status(200).build();
+        return ResponseEntity.status(200).build();       
     }
 
     @GetMapping("{id}")

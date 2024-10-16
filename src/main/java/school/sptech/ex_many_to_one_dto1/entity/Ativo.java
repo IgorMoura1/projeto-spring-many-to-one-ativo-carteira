@@ -13,6 +13,7 @@ public class Ativo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Integer id;
 
     private String nome;
@@ -23,7 +24,4 @@ public class Ativo {
 
     @ManyToOne
     private Carteira carteira;
-
-
-
 }
