@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface AtivoRepository extends JpaRepository<Ativo, Integer> {
 
-    public List<Ativo> findByCarteiraInvestidorIgnoreCase(String investidor);
+    public List<Ativo> findByCarteiraInvestidorContainingIgnoreCase(String investidor);
 
     @Query("SELECT AVG(a.valorAtual) FROM Ativo a WHERE a.carteira.investidor = :nome")
     Double buscarMediaAtivosPorInvestidorNome(@Param("nome") String nome);
