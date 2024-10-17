@@ -24,6 +24,7 @@ public class AtivoMapper {
                 .builder()
                 .id(ativo.getId())
                 .nome(ativo.getNome())
+                .tipo(ativo.getTipo())
                 .valorAtual(ativo.getValorAtual())
                 .carteira(ativoCarteiraResponseDto)
                 .build();
