@@ -9,10 +9,8 @@ import school.sptech.ex_many_to_one_dto1.entity.Ativo;
 import school.sptech.ex_many_to_one_dto1.entity.Carteira;
 import school.sptech.ex_many_to_one_dto1.exception.NaoEncontradoException;
 import school.sptech.ex_many_to_one_dto1.repository.AtivoRepository;
-
 import java.util.List;
 
-// TODO: TERMINAR A CLASSE
 @Service
 @RequiredArgsConstructor
 public class AtivoService {

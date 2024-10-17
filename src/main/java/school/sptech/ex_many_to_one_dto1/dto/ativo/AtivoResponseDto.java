@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+
 public class AtivoResponseDto {
 
     private Integer id;
@@ -21,6 +22,7 @@ public class AtivoResponseDto {
     @Builder
     @NoArgsConstructor
     @AllArgsConstructor
+
     public static class AtivoCarteiraResponseDto {
         private Integer id;
         private String nome;

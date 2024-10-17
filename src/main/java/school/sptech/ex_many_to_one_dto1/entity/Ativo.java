@@ -23,7 +23,4 @@ public class Ativo {
 
     @ManyToOne
     private Carteira carteira;
-
-
-
 }

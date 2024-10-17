@@ -13,5 +13,4 @@ public interface AtivoRepository extends JpaRepository<Ativo, Integer> {
 
     @Query("SELECT AVG(a.valorAtual) FROM Ativo a WHERE a.carteira.investidor = :nome")
     Double buscarMediaAtivosPorInvestidorNome(@Param("nome") String nome);
-
 }

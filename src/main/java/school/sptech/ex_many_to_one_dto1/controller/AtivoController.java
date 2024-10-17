@@ -39,7 +39,7 @@ public class AtivoController {
     public ResponseEntity<List<AtivoResponseDto>> buscarTodos() {
         List<Ativo> ativos = ativoService.buscarTodos();
 
-        if(ativos.isEmpty()) {
+        if (ativos.isEmpty()) {
             return ResponseEntity.status(204).build();
         }
 
@@ -63,7 +63,7 @@ public class AtivoController {
     public ResponseEntity<Void> deletarPorId(@PathVariable Integer id) {
         Ativo ativo = this.ativoService.buscarPorId(id);
 
-        if(ativo == null) {
+        if (ativo == null) {
             return ResponseEntity.notFound().build();
         }
 
